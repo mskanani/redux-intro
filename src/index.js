@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore, combineReducers, applyMiddleware } from 'redux'; // function
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'; // function
 import counterReducer from './store/reducers/counter';
 import resultReducer from './store/reducers/result';
 import { Provider } from 'react-redux'; // component with Capital letter
@@ -24,8 +24,10 @@ const logger = store => {
     }
 };
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 //before mounting the app, we create store
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
