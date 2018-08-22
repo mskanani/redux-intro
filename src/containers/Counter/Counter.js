@@ -3,7 +3,7 @@ import {connect} from 'react-redux'; //a function that returns a higher order co
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-import * as actionTypes from '../../store/actions';
+import * as actionCreators from '../../store/actions/actions';
 
 class Counter extends Component {
     render () {
@@ -36,12 +36,12 @@ const mapStateToProps = state => {
 // Dipatching actions
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}), // the type property is the only property where the name is not up to us
-        onDecrementCounter: () => dispatch({type: actionTypes.DECREMENT}),
-        onAddCounter: () => dispatch({type: actionTypes.ADD, value: 10}),
-        onSubtractCounter: () => dispatch({type: actionTypes.SUBTRACT, value: 15}),
-        onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULT, result: result }),
-        onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id }),
+        onIncrementCounter: () => dispatch(actionCreators.increment()), // the type property is the only property where the name is not up to us
+        onDecrementCounter: () => dispatch(actionCreators.decrement()),
+        onAddCounter: () => dispatch(actionCreators.add(10)),
+        onSubtractCounter: () => dispatch(actionCreators.subtract(15)),
+        onStoreResult: (result) => dispatch(actionCreators.storeResult(result)),
+        onDeleteResult: (id) => dispatch(actionCreators.deleteResult(id)),
     };
 };
 
