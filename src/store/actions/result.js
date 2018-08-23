@@ -8,8 +8,10 @@ export const saveResult = (res) => {
 }
 
 export const storeResult = (res) => {
-    return (dispatch) => {
+    return (dispatch, getState) => { // dispatch, getState (old State) is being handed to this function by thunk middleware
         setTimeout(() => {
+            const oldCounter = getState().ctr.counter;
+            console.log(oldCounter);
             dispatch(saveResult(res))
         }, 3000);
     }
